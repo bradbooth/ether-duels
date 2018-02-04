@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="main-buttons">
+        <button id="createCharacter">Create a new character</button>
+        <button id="saveCharacter">Save your character</button>
+    </div>
+    <div id="stats-list-container">
+        <ol id="stats-list"></ol>
+    </div>
+
+    <div id="message-container">
+        <p>Create a character</p>
+    </div>
+
+    <script id="stats" type="text/template">
+        <div id="stats-list-container">
+            <p> Points remaining: {{unassigned-points}} </p>
+            <ol id="stats-list">
+                    <li>Health   : {{health-value}}   <button id="health-plus">+</button><button id="health-minus">-</button></li>
+                    <li>Attack   : {{attack-value}}   <button id="attack-plus">+</button><button id="attack-minus">-</button></li>
+                    <li>Strength : {{strength-value}} <button id="strength-plus">+</button><button id="strength-minus">-</button></li>
+                    <li>Defence  : {{defence-value}}  <button id="defence-plus">+</button><button id="defence-minus">-</button></li>
+            </ol>
+        </div>
+    </script>
+
+
+    <script type="text/javascript" src="./js/libs/mustache.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+
+</body>
+</html>
