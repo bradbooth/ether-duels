@@ -59,22 +59,49 @@ io.on('connection', (socket) => {
     //Create character from smart contract
     socket.on('save-character', (data, callback) => {
         console.log("Save character");
-        etherduel.updateCharacter(data);
+        //Validate
         etherduel.getCharacter( (err, res) => {
             if(err){
-                console.log('characterStats: ', err)
+                console.log('Error retrieving stats: ', err)
             }else{
-                console.log('characterStats: ', res)
-                //Return character details
-                callback({
-                    'health-value'    : res[0],
-                    'attack-value'    : res[1],
-                    'strength-value'  : res[2],
-                    'defence-value'   : res[3],
-                    'unassigned-points': res[4]
-                });
+                allowedSum = parseInt(res[0])  
+                           + parseInt(res[1])
+                           + parseInt(res[2])
+                           + parseInt(res[3])
+                           + parseInt(res[4])
+
+                givenSum = parseInt(data['health-value'])
+                         + parseInt(data['attack-value'])
+                         + parseInt(data['strength-value'])
+                         + parseInt(data['defence-value'])
+                         + parseInt(data['unassigned-points'])
+
+                //Verify theyre the same
+                if (allowedSum != givenSum){
+                    return;
+                }else{
+                    //If the same, then update
+                    etherduel.updateCharacter(data);
+                    etherduel.getCharacter( (err, res) => {
+                        if(err){
+                            console.log('characterStats: ', err)
+                        }else{
+                            console.log('characterStats: ', res)
+                            //Return character details
+                            callback({
+                                'health-value'    : res[0],
+                                'attack-value'    : res[1],
+                                'strength-value'  : res[2],
+                                'defence-value'   : res[3],
+                                'unassigned-points': res[4]
+                            });
+                        }
+                    });
+                }
             }
         });
+
+
     });
 
 

@@ -14,7 +14,7 @@ if (typeof web3 !== 'undefined') {
 web3.eth.defaultAccount = web3.eth.accounts[1];
 
 //var abi = [ { "constant": true, "inputs": [], "name": "getCharacter", "outputs": [ { "name": "_health", "type": "uint256" }, { "name": "_attack", "type": "uint256" }, { "name": "_strength", "type": "uint256" }, { "name": "_defence", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "createCharacter", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ]
-var contractAddress = '0xf117779215cdd40ac8956e74b3b2f619537cd532'
+var contractAddress = '0xf6e8c1bc0de477cbd053eaf9cb8be92f63b8fd03'
 
 var ethereumContract = web3.eth.contract(settings.abi);
 var contract = ethereumContract.at(contractAddress);

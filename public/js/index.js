@@ -37,7 +37,6 @@ jQuery('#saveCharacter').on('click', function (event) {
 
 });
 
-
 jQuery(document).on('click','#health-plus', function (event) {
   if(characterStats['unassigned-points'] > 0){
     characterStats['unassigned-points'] --;
