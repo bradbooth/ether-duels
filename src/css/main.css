@@ -1,0 +1,104 @@
+body {
+    background-color: rgb(54, 53, 53);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+}
+
+p, li{
+    color: white;
+}
+
+#title{
+    font-size: 60px;
+    font-weight: lightest;
+    text-align: center;
+    color: white;
+}
+
+#buttonContainer {
+    text-align: center;
+}
+
+.button-style {
+    width: 200px;
+    height: 80px;
+    border-style: none;
+    color:white;
+    font-size: 25px;
+}
+
+#create-button {
+    background: rgb(21, 134, 6);
+}
+#create-button:hover {
+    background: rgb(33, 197, 11);
+}
+
+#save-button {
+    background: rgb(9, 98, 170);
+}
+#save-button:hover {
+    background: rgb(15, 118, 202);
+}
+
+#load-button {
+    background: rgb(111, 9, 170);
+}
+#load-button:hover {
+    background: rgb(129, 11, 197);
+}
+
+#duel-button {
+    background: rgb(145, 7, 7);
+}
+#duel-button:hover {
+    background: rgb(201, 9, 9);
+}
+
+#characterContainer {
+    display: flex;
+    text-align: left;
+    margin:auto;
+    width:900px;
+    background-color: rgb(71, 69, 69);
+    margin-bottom:50px;
+}
+
+
+
+#stat-list-container, #stat-value-container, #stat-button-container {
+    width: 10%;  
+    height: 200px; 
+    margin: auto; 
+    list-style: none;
+    font-size: 20px;
+}
+
+#stat-value-container {
+    text-align: right;
+    width:10%;
+}
+
+#button-placeholder {
+    height: 44px;
+}
+.stat-button {
+    width: 30%;
+    height:18px;
+    margin-left: 15px;
+}
+
+#char-display-container {
+    width: 70%;  
+    margin: auto;
+    background-color: rgb(56, 56, 56);
+    margin-left: 15px;
+}
+
+#canvas {
+    background-color: white;
+}
+
+#messageContainer, #points-remain {
+    text-align: center;
+}

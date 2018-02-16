@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+
+  <body>
+
+    <div id="mainContainer">
+        <h1 id="title">EtherDuels</h1>
+        <p> </p>
+        <div id="characterContainer">
+            <div id="stat-list-container">
+                <ul style="list-style:none">
+                    <li>Level</li>
+                    <li>Health</li>
+                    <li>Attack</li>
+                    <li>Strength</li>
+                    <li>Defence</li>
+                </ul>
+
+            </div>
+            <div id="stat-value-container">
+        
+                    <ul style="list-style:none">
+                        <li>-</li>
+                        <li>-</li>
+                        <li>-</li>
+                        <li>-</li>
+                        <li>-</li>
+                    </ul>
+                    
+            </div>
+            
+            <div id="stat-button-container">
+                <div    class="stat-button" id="button-placeholder"></div>
+                <button class="stat-button" id="health-plus">+</button><button class="stat-button" id="health-minus">-</button>
+                <button class="stat-button" id="attack-plus">+</button><button class="stat-button" id="attack-minus">-</button>
+                <button class="stat-button" id="strength-plus">+</button><button class="stat-button" id="strength-minus">-</button>
+                <button class="stat-button" id="defence-plus">+</button><button class="stat-button" id="defence-minus">-</button>
+            </div>
+            <div id="char-display-container">
+                <p id="points-remain">Points remaining: - </p>
+                <canvas id="canvas" width="618px" height="600px"
+                    style="border:1px solid #000000;">
+                </canvas>
+            </div>
+        </div>
+        <div id="buttonContainer">
+                <button id="create-button" class ="button-style">Create</button>
+                <button id="save-button"   class ="button-style">Save</button>
+                <button id="load-button"   class ="button-style">Load</button>
+                <button id="duel-button"   class ="button-style">Duel</button>
+        </div>
+        <div id="messageContainer">
+                <p id="message">Create your character to begin.</p> 
+        </div>
+
+    </div>
+    
+    <!-- Templates -->
+    <script id="stats" type="text/template">
+        <div id="stat-value-container">
+            <ol id="stats-list" style="list-style:none">
+                <li>{{level}}</li>
+                <li>{{health-value}}</li>
+                <li>{{attack-value}}</li>
+                <li>{{strength-value}}</li>
+                <li>{{defence-value}}</li>
+            </ol>
+        </div>
+    </script>
+
+    <script id="points-remaining" type="text/template"> 
+        <p id="points-remain">Points remaining: {{unassigned-points}} </p>
+    </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/web3.min.js"></script>
+    <script src="js/libs/truffle-contract.js"></script>
+    <script src="js/libs/mustache.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/character.js"></script>
+    <script src="js/util/statbuttons.js"></script>
+
+
+  </body>
+
+</html>
