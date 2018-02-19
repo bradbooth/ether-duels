@@ -59,11 +59,10 @@ p, li{
     display: flex;
     text-align: left;
     margin:auto;
-    width:900px;
+    width:950px;
     background-color: rgb(71, 69, 69);
     margin-bottom:50px;
 }
-
 
 
 #stat-list-container, #stat-value-container, #stat-button-container {
@@ -89,16 +88,74 @@ p, li{
 }
 
 #char-display-container {
-    width: 70%;  
+    width: 630px;  
     margin: auto;
     background-color: rgb(56, 56, 56);
     margin-left: 15px;
 }
 
 #canvas {
-    background-color: white;
+    background-color: rgb(63, 63, 63);
 }
 
 #messageContainer, #points-remain {
     text-align: center;
 }
+
+#inventory-container {
+    width:100%;
+    display:block;
+    float: left;
+    position: relative;
+}
+
+.inventory-buttons{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+
+
+
+#head-button, #body-button, #legs-button {
+    left: 440px;
+}
+
+#head-button {
+    top: 38px;
+}
+
+#body-button {
+    top:103px;
+}
+
+#legs-button {
+    top:170px;
+}
+
+#weapon-button {
+    left:374px;
+    top:103px;
+}
+
+#inventory1-button {
+    left: 381px;
+    top:240px;
+}
+
+#inventory2-button {
+    left: 440px;
+    top:240px;
+}
+
+#inventory3-button {
+    left: 496px;
+    top:240px;
+}
+
+
+

@@ -10,13 +10,14 @@ contract etherduel {
         uint defence; 
         uint unassignedPoints;
         uint timestamp;
-        uint helmet_id;
-        uint body_id;
-        uint legs_id;
+        uint helmetId;
+        uint bodyId;
+        uint legsId;
+        uint weaponId;
         uint hashid;
         bool dueling;
 
-        uint[] inventory;
+        uint[3] inventory; //Define as bytes5? 
     }
 
     struct item {
@@ -40,29 +41,45 @@ contract etherduel {
         // 1 2 3 4
         // | | |_|___item code
         // | |_______level requirement
-        // |_________item type (0=helmet,1=body,2=legs)
+        // |_________item type (1=helmet,2=body,3=legs,4=weapon)
+        //
+        // Item codes should always be a min of (n * 1000 + 100) where n > 0 ie. 1100
 
         //Helmets
-        items[1100] = item(0,0,0,true);
+        //items[1100] = item(0,0,0,true);
         items[1101] = item(0,0,1,true);
         items[1102] = item(0,0,0,true);
         items[1103] = item(0,0,1,true);
-
+        items[1104] = item(0,0,0,true);
+        items[1104] = item(0,0,1,true);
         //Bodies
-        items[2100] = item(0,0,0,true);
+        //items[2100] = item(0,0,0,true);
         items[2101] = item(0,0,1,true);
         items[2102] = item(0,0,0,true);
         items[2103] = item(0,0,1,true);
+        items[2104] = item(0,0,0,true);
+        items[2105] = item(0,0,1,true);
         //Legs
-        items[3100] = item(0,0,0,true);
+        //items[3100] = item(0,0,0,true);
         items[3101] = item(0,0,1,true);
         items[3102] = item(0,0,0,true);
         items[3103] = item(0,0,1,true);
+        items[3104] = item(0,0,0,true);
+        items[3105] = item(0,0,1,true);
+        //Weapons
+        //items[4100] = item(0,0,1,true);
+        items[4101] = item(0,0,1,true);
+        items[4102] = item(0,0,1,true);
+        items[4103] = item(0,0,1,true);
+        items[4104] = item(0,0,1,true);
+        items[4105] = item(0,0,1,true);
+        items[4106] = item(0,0,1,true);
+        items[4107] = item(0,0,1,true);
+        items[4108] = item(0,0,1,true);
    }
    
    //Create a new character
    function createCharacter() public {
-       characters[msg.sender].inventory = new uint[](6);
        resetCharacter(msg.sender);
        generateRandomItem(msg.sender);
    }
@@ -80,6 +97,10 @@ contract etherduel {
                      uint _helmetid,
                      uint _bodyid,
                      uint _legsid,
+                     uint _weaponid,
+                     uint _inv0,
+                     uint _inv1,
+                     uint _inv2,
                      uint _hashid)
     {
 
@@ -90,9 +111,13 @@ contract etherduel {
        _strength = _character.strength;
        _defence = _character.defence;
        _unassignedPoints = _character.unassignedPoints;
-       _helmetid = _character.helmet_id;
-       _bodyid = _character.body_id;
-       _legsid = _character.legs_id;
+       _helmetid = _character.helmetId;
+       _bodyid = _character.bodyId;
+       _legsid = _character.legsId;
+       _weaponid = _character.weaponId;
+       _inv0 = _character.inventory[0];
+       _inv1 = _character.inventory[1];
+       _inv2 = _character.inventory[2];
        _hashid = _character.hashid;
    }
 
@@ -221,32 +246,79 @@ contract etherduel {
        characters[_address].defence = 1;
        characters[_address].unassignedPoints = 3;
        characters[_address].timestamp = block.timestamp;
-       characters[_address].helmet_id = 1100;
-       characters[_address].body_id = 2100;
-       characters[_address].legs_id = 3100;
+       characters[_address].helmetId = 0;
+       characters[_address].bodyId = 0;
+       characters[_address].legsId = 0;
+       characters[_address].weaponId = 0;
+       characters[_address].inventory[0] = 0; //Can this be consolidated into one call?
+       characters[_address].inventory[1] = 0;
+       characters[_address].inventory[2] = 0;
    }
+
+
+        // 1 2 3 4
+        // | | |_|___item code
+        // | |_______level requirement
+        // |_________item type (1=helmet,2=body,3=legs,4=weapon)
 
     function generateRandomItem(address adr) private {
         //Chance at getting an item after leveling up/creation
         //generate a random item
-        uint itemType = ((genRandom() % 3) + 1) * 1000;
+        uint itemType = ((genRandom() % 4) + 1) * 1000;
         uint itemLevel = ((genRandom() % characters[adr].level) + 1) * 100;
-        uint itemId = genRandom() % 4;
+        uint itemId = genRandom() % 6;
         uint itemhash = itemType + itemLevel + itemId;
         characters[adr].hashid = itemhash;
         // Check if it maps to an exisiting item
         // TODO - This should add to inventory in future
         if (items[itemhash].exists) {
             //Add to inventory
-            characters[adr].inventory.push(itemhash);
-                  if (itemType == 1000) {
-                      characters[adr].helmet_id = itemhash;
-            } else if (itemType == 2000) {
-                      characters[adr].body_id = itemhash;
-            } else if (itemType == 3000) {
-                      characters[adr].legs_id = itemhash;
+            addToInventory(itemhash, adr);
+
+            //       if (itemType == 1000) {
+            //           characters[adr].helmetId = itemhash;
+            // } else if (itemType == 2000) {
+            //           characters[adr].bodyId = itemhash;
+            // } else if (itemType == 3000) {
+            //           characters[adr].legsId = itemhash;
+            // } else if (itemType == 4000) {
+            //           characters[adr].weaponId = itemhash;
+            // }
+        }
+    }
+
+    // Add an item to the inventory if there is space
+    function addToInventory(uint itemCode, address adr) private {
+        for (uint i = 0; i < characters[adr].inventory.length; i++) {
+            if (characters[adr].inventory[i] == 0) {
+                characters[adr].inventory[i] = itemCode;
+                break;
             }
-            
+        }
+    }
+
+    // Equip an item from inventory to a character
+    function equipItem(uint itemCode, address adr) private {
+        for (uint i = 0; i < characters[adr].inventory.length; i++) {
+            if (characters[adr].inventory[i] == itemCode) {
+                uint itemType = getItemType(itemCode);
+                uint temp = itemCode;
+                //If the item is a helmet, equip in helmet spot, etc.
+                if (itemType == 1) {
+                    characters[adr].inventory[i] = characters[adr].helmetId;
+                    characters[adr].helmetId = itemCode;
+                } else if (itemType == 2) {
+                    characters[adr].inventory[i] = characters[adr].bodyId;
+                    characters[adr].bodyId = temp;
+                } else if (itemType == 3) { 
+                    characters[adr].inventory[i] = characters[adr].legsId;
+                    characters[adr].legsId = temp;
+                } else if (itemType == 4) {
+                    characters[adr].inventory[i] = characters[adr].weaponId;
+                    characters[adr].weaponId = temp;
+                }
+                break;
+            }
         }
     }
 
@@ -260,5 +332,10 @@ contract etherduel {
         digit = (uint8) (randomNumber % 10);
         randomNumber = randomNumber / 10;
    }
- 
+
+   // Item codes should always be a min of (n * 1000 + 100) where n > 0 ie. 1100
+   function getItemType(uint itemCode) private returns (uint itemType) {
+        itemType = itemCode / (2**10);
+   }
+
 }

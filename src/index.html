@@ -44,9 +44,27 @@
             </div>
             <div id="char-display-container">
                 <p id="points-remain">Points remaining: - </p>
-                <canvas id="canvas" width="618px" height="600px"
-                    style="border:1px solid #000000;">
-                </canvas>
+                <div id="inventory-container">
+                    <canvas id="character-canvas" width="300px" height="300px"
+                        style="border:1px solid #000000;">
+                    </canvas>
+                    
+                    <canvas id="inventory-canvas" width="300px" height="300px"
+                        style="border:1px solid #000000;">
+                    </canvas>
+                    <button id="head-button" class="inventory-buttons">head</button>
+                    <button id="body-button" class="inventory-buttons">body</button>
+                    <button id="legs-button" class="inventory-buttons">legs</button>
+                    <button id="weapon-button" class="inventory-buttons">wepn</button>
+
+
+                    <button id="inventory1-button" class="inventory-buttons">1</button>
+                    <button id="inventory2-button" class="inventory-buttons">2</button>
+                    <button id="inventory3-button" class="inventory-buttons">3</button>
+                </div>
+                
+                
+                
             </div>
         </div>
         <div id="buttonContainer">
@@ -89,6 +107,7 @@
     <script src="js/app.js"></script>
     <script src="js/character.js"></script>
     <script src="js/util/statbuttons.js"></script>
+    <script src="js/util/inventory.js"></script>
 
 
   </body>

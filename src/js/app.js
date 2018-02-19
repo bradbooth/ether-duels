@@ -45,6 +45,16 @@ App = {
     $(document).on('click', '#load-button', App.loadCharacter);
     $(document).on('click', '#duel-button', App.duel);
 
+
+    $(document).on('click', '#head-button', inventory.unequipHelmet);
+    $(document).on('click', '#body-button', inventory.unequipBody);
+    $(document).on('click', '#legs-button', inventory.unequipLegs);
+    $(document).on('click', '#weapon-button', inventory.unequipWeapon);
+
+    $(document).on('click', '#inventory1-button', inventory.equip1);
+    $(document).on('click', '#inventory2-button', inventory.equip2);
+    $(document).on('click', '#inventory3-button', inventory.equip3);
+
     $(document).on('click', '#health-plus', statbuttons.health_plus);
     $(document).on('click', '#health-minus', statbuttons.health_minus);
     $(document).on('click', '#attack-plus', statbuttons.attack_plus);
@@ -176,7 +186,11 @@ App = {
       'helmet-id'        : stats[6].c[0],
       'body-id'          : stats[7].c[0],
       'legs-id'          : stats[8].c[0],
-      'hash-id'          : stats[9].c[0]
+      'weapon-id'        : stats[9].c[0],
+      'inv1-id'          : stats[10].c[0],
+      'inv2-id'          : stats[11].c[0],
+      'inv3-id'          : stats[12].c[0],
+      'hash-id'          : stats[13].c[0]
     }
     startingStats = Object.assign({}, characterStats);
   },
@@ -191,7 +205,7 @@ App = {
       var html = Mustache.render(template, characterStats);
       $('#points-remain').replaceWith(html)
       console.log(characterStats['hash-id'])
-      loadCharacter(characterStats['helmet-id'], characterStats['body-id'],characterStats['legs-id'],)
+      loadCharacter(characterStats)
   },
 
 };
